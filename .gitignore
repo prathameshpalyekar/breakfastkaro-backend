@@ -1,3 +1,5 @@
 firebase-debug.log
 public/assets/
 functions/node_modules/
+.env
+functions/lib
