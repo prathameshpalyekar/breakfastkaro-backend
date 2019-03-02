@@ -41,7 +41,12 @@ export default function (request, response) {
             data.emailVerified = false;
             data.createdAt = moment().format('LLL');
             return User.save(data);
-        })]
+        })],
+        sendVerifyEmail: ['signupUser', async.asyncify((results) => {
+            return User.getVerifyEmailToken(data.email).then((token) => {
+                return User.sendVerifyEmail(data.email, token);
+            });
+        })],
     }, (err, results) => {
         if (err) {
             const error = err.isBoom ? err : Boom.wrap(err);
