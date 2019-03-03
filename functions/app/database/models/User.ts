@@ -15,6 +15,7 @@ const User = {
     save: null,
     getVerifyEmailToken: null,
     sendVerifyEmail: null,
+    findUserById: null,
 };
 
 User.hashPassword = (password) => {
@@ -28,6 +29,15 @@ User.findUser = (email) => {
             return resolve(value);
         });
         
+    });
+}
+
+User.findUserById = (id) => {
+    return new Promise((resolve, reject) => {
+        firebaseDb.ref('/User/' + id).once('value').then((snapshot) => {
+            const value = snapshot.val();
+            return resolve(value);
+        });
     });
 }
 
