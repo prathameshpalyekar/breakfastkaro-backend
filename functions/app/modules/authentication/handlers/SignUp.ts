@@ -49,7 +49,8 @@ export default function (request, response) {
         })],
     }, (err, results) => {
         if (err) {
-            const error = err.isBoom ? err : Boom.wrap(err);
+            console.log(err);
+            const error = err.isBoom ? err : Boom.boomify(err);
             const { output } = error;
             const { statusCode, payload } = output;
             return response.status(statusCode).send(payload);
